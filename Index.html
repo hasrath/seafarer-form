@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seafarer Application Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            border: 2px solid #e8f2ff;
+            border-radius: 15px;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fbff 100%);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: #2a5298;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-row.single {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select, textarea {
+            padding: 12px 15px;
+            border: 2px solid #e1e8f0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border: 2px dashed #e1e8f0;
+            background: #f8fbff;
+            cursor: pointer;
+        }
+
+        input[type="file"]:hover {
+            border-color: #667eea;
+            background: #f0f7ff;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e8f2ff;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                margin: 10px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .experience-entry {
+            background: #f8fbff;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #e1e8f0;
+            position: relative;
+        }
+
+        .experience-entry:not(:first-child) {
+            border-top: 3px solid #667eea;
+        }
+
+        .remove-experience {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-experience:hover {
+            background: #c0392b;
+        }
+
+        #addExperienceBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚓ Seafarer Application Form</h1>
+            <p>Complete your maritime career application</p>
+        </div>
+
+        <div class="form-container">
+            <div class="success-message" id="successMessage">
+                ✅ Application submitted successfully! We will contact you soon.
+            </div>
+
+            <form id="seafarerForm">
+                <!-- Rank Applied Section -->
+                <div class="section">
+                    <h2 class="section-title">Position Applied</h2>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label for="rank">Rank Applied <span class="required">*</span></label>
+                            <select id="rank" name="rank" required>
+                                <option value="">Select Rank</option>
+                                <option value="Captain">Captain</option>
+                                <option value="Chief Officer">Chief Officer</option>
+                                <option value="Second Officer">Second Officer</option>
+                                <option value="Third Officer">Third Officer</option>
+                                <option value="Chief Engineer">Chief Engineer</option>
+                                <option value="Second Engineer">Second Engineer</option>
+                                <option value="Third Engineer">Third Engineer</option>
+                                <option value="Fourth Engineer">Fourth Engineer</option>
+                                <option value="Bosun">Bosun</option>
+                                <option value="AB Seaman">AB Seaman</option>
+                                <option value="Ordinary Seaman">Ordinary Seaman</option>
+                                <option value="Cook">Cook</option>
+                                <option value="Steward">Steward</option>
+                                <option value="Wiper">Wiper</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Identification Section -->
+                <div class="section">
+                    <h2 class="section-title">Personal Identification</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Surname <span class="required">*</span></label>
+                            <input type="text" id="surname" name="surname" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Sex <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="male" name="sex" value="male" required>
+                                    <label for="male">Male</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="female" name="sex" value="female" required>
+                                    <label for="female">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth <span class="required">*</span></label>
+                            <input type="date" id="dob" name="dob" required>
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label for="indosNumber">INDOS Number <span class="required">*</span></label>
+                            <input type="text" id="indosNumber" name="indosNumber" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information Section -->
+                <div class="section">
+                    <h2 class="section-title">Contact Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mobile">Mobile Number <span class="required">*</span></label>
+                            <input type="tel" id="mobile" name="mobile" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Travel/Professional Documents Section -->
+                <div class="section">
+                    <h2 class="section-title">Key Travel/Professional Documents</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passportNumber">Passport Number <span class="required">*</span></label>
+                            <input type="text" id="passportNumber" name="passportNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passportExpiry">Passport Expiry Date <span class="required">*</span></label>
+                            <input type="date" id="passportExpiry" name="passportExpiry" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="seamansBookNumber">Seaman's Book Number <span class="required">*</span></label>
+                            <input type="text" id="seamansBookNumber" name="seamansBookNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="seamansBookExpiry">Seaman's Book Expiry Date <span class="required">*</span></label>
+                            <input type="date" id="seamansBookExpiry" name="seamansBookExpiry" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cocNumber">COC Number</label>
+                            <input type="text" id="cocNumber" name="cocNumber">
+                        </div>
+                        <div class="form-group">
+                            <label for="cocExpiry">COC Expiry Date</label>
+                            <input type="date" id="cocExpiry" name="cocExpiry">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience Summary Section -->
+                <div class="section">
+                    <h2 class="section-title">Experience Summary</h2>
+                    <div id="experienceContainer">
+                        <div class="experience-entry">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vesselName_1">Name of Vessel <span class="required">*</span></label>
+                                    <input type="text" id="vesselName_1" name="vesselName_1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vesselType_1">Type of Vessel <span class="required">*</span></label>
+                                    <select id="vesselType_1" name="vesselType_1" required>
+                                        <option value="">Select Vessel Type</option>
+                                        <option value="Bulk Carrier">Bulk Carrier</option>
+                                        <option value="Tanker">Tanker</option>
+                                        <option value="Container Ship">Container Ship</option>
+                                        <option value="General Cargo">General Cargo</option>
+                                        <option value="Passenger Vessel">Passenger Vessel</option>
+                                        <option value="Cruise Ship">Cruise Ship</option>
+                                        <option value="Ferry">Ferry</option>
+                                        <option value="Offshore Vessel">Offshore Vessel</option>
+                                        <option value="Tug Boat">Tug Boat</option>
+                                        <option value="Fishing Vessel">Fishing Vessel</option>
+                                        <option value="Research Vessel">Research Vessel</option>
+                                        <option value="Naval Vessel">Naval Vessel</option>
+                                        <option value="LNG Carrier">LNG Carrier</option>
+                                        <option value="LPG Carrier">LPG Carrier</option>
+                                        <option value="Chemical Tanker">Chemical Tanker</option>
+                                        <option value="Oil Tanker">Oil Tanker</option>
+                                        <option value="RORO Vessel">RORO Vessel</option>
+                                        <option value="Heavy Lift Vessel">Heavy Lift Vessel</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fromDate_1">From Date <span class="required">*</span></label>
+                                    <input type="date" id="fromDate_1" name="fromDate_1" onchange="calculateExperience(1)" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="toDate_1">To Date <span class="required">*</span></label>
+                                    <input type="date" id="toDate_1" name="toDate_1" onchange="calculateExperience(1)" required>
+                                </div>
+                            </div>
+                            <div class="form-row single">
+                                <div class="form-group">
+                                    <label for="experienceDuration_1">Experience Duration</label>
+                                    <input type="text" id="experienceDuration_1" name="experienceDuration_1" readonly style="background-color: #f8f9fa; font-weight: bold; color: #2a5298;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; text-align: center;">
+                        <button type="button" id="addExperienceBtn" style="background: linear-gradient(135deg, #28a745, #20c997); color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: 600;">
+                            + Add Another Vessel Experience
+                        </button>
+                    </div>
+                    
+                    <div class="form-row single" style="margin-top: 25px; padding-top: 20px; border-top: 2px solid #e8f2ff;">
+                        <div class="form-group">
+                            <label for="totalCalculatedExperience">Total Calculated Experience</label>
+                            <input type="text" id="totalCalculatedExperience" name="totalCalculatedExperience" readonly style="background-color: #e8f5e8; font-weight: bold; color: #28a745; font-size: 1.1em; text-align: center;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Availability Section -->
+                <div class="section">
+                    <h2 class="section-title">Availability</h2>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label for="availability">Date of Availability <span class="required">*</span></label>
+                            <input type="date" id="availability" name="availability" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Document Uploads Section -->
+                <div class="section">
+                    <h2 class="section-title">Document Uploads</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="photo">Applicant's Photo <span class="required">*</span></label>
+                            <input type="file" id="photo" name="photo" accept="image/*" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cv">Curriculum Vitae (CV) <span class="required">*</span></label>
+                            <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passportCopy">Passport Copy <span class="required">*</span></label>
+                            <input type="file" id="passportCopy" name="passportCopy" accept=".pdf,.jpg,.jpeg,.png" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="seamansBookCopy">Seaman's Book Copy <span class="required">*</span></label>
+                            <input type="file" id="seamansBookCopy" name="seamansBookCopy" accept=".pdf,.jpg,.jpeg,.png" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cocCopy">COC Copy</label>
+                            <input type="file" id="cocCopy" name="cocCopy" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                        <div class="form-group">
+                            <label for="certificates">Key Certificates</label>
+                            <input type="file" id="certificates" name="certificates" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                            <small style="color: #666; margin-top: 5px; display: block;">Basic Safety Training, Medical Certificate, etc. (Multiple files allowed)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Section -->
+                <div class="submit-section">
+                    <button type="submit" class="submit-btn">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let experienceCounter = 1;
+
+        // Function to calculate experience duration
+        function calculateExperience(entryNumber) {
+            const fromDate = document.getElementById(`fromDate_${entryNumber}`).value;
+            const toDate = document.getElementById(`toDate_${entryNumber}`).value;
+            const durationField = document.getElementById(`experienceDuration_${entryNumber}`);
+            
+            if (fromDate && toDate) {
+                const from = new Date(fromDate);
+                const to = new Date(toDate);
+                
+                if (to >= from) {
+                    const diffTime = Math.abs(to - from);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    const years = Math.floor(diffDays / 365);
+                    const months = Math.floor((diffDays % 365) / 30);
+                    const days = diffDays % 30;
+                    
+                    let duration = '';
+                    if (years > 0) duration += `${years} year${years > 1 ? 's' : ''} `;
+                    if (months > 0) duration += `${months} month${months > 1 ? 's' : ''} `;
+                    if (days > 0) duration += `${days} day${days > 1 ? 's' : ''}`;
+                    
+                    durationField.value = duration.trim() || '0 days';
+                    
+                    // Calculate total experience
+                    calculateTotalExperience();
+                } else {
+                    durationField.value = 'Invalid date range';
+                }
+            } else {
+                durationField.value = '';
+            }
+        }
+
+        // Function to calculate total experience
+        function calculateTotalExperience() {
+            let totalDays = 0;
+            
+            for (let i = 1; i <= experienceCounter; i++) {
+                const fromDateElement = document.getElementById(`fromDate_${i}`);
+                const toDateElement = document.getElementById(`toDate_${i}`);
+                
+                if (fromDateElement && toDateElement && fromDateElement.value && toDateElement.value) {
+                    const from = new Date(fromDateElement.value);
+                    const to = new Date(toDateElement.value);
+                    
+                    if (to >= from) {
+                        const diffTime = Math.abs(to - from);
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                        totalDays += diffDays;
+                    }
+                }
+            }
+            
+            const totalField = document.getElementById('totalCalculatedExperience');
+            if (totalDays > 0) {
+                const years = Math.floor(totalDays / 365);
+                const months = Math.floor((totalDays % 365) / 30);
+                const days = totalDays % 30;
+                
+                let totalDuration = '';
+                if (years > 0) totalDuration += `${years} year${years > 1 ? 's' : ''} `;
+                if (months > 0) totalDuration += `${months} month${months > 1 ? 's' : ''} `;
+                if (days > 0) totalDuration += `${days} day${days > 1 ? 's' : ''}`;
+                
+                totalField.value = totalDuration.trim() || '0 days';
+            } else {
+                totalField.value = '';
+            }
+        }
+
+        // Function to add new experience entry
+        function addExperienceEntry() {
+            experienceCounter++;
+            const container = document.getElementById('experienceContainer');
+            
+            const newEntry = document.createElement('div');
+            newEntry.className = 'experience-entry';
+            newEntry.innerHTML = `
+                <button type="button" class="remove-experience" onclick="removeExperienceEntry(this)">×</button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vesselName_${experienceCounter}">Name of Vessel <span class="required">*</span></label>
+                        <input type="text" id="vesselName_${experienceCounter}" name="vesselName_${experienceCounter}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vesselType_${experienceCounter}">Type of Vessel <span class="required">*</span></label>
+                        <select id="vesselType_${experienceCounter}" name="vesselType_${experienceCounter}" required>
+                            <option value="">Select Vessel Type</option>
+                            <option value="Bulk Carrier">Bulk Carrier</option>
+                            <option value="Tanker">Tanker</option>
+                            <option value="Container Ship">Container Ship</option>
+                            <option value="General Cargo">General Cargo</option>
+                            <option value="Passenger Vessel">Passenger Vessel</option>
+                            <option value="Cruise Ship">Cruise Ship</option>
+                            <option value="Ferry">Ferry</option>
+                            <option value="Offshore Vessel">Offshore Vessel</option>
+                            <option value="Tug Boat">Tug Boat</option>
+                            <option value="Fishing Vessel">Fishing Vessel</option>
+                            <option value="Research Vessel">Research Vessel</option>
+                            <option value="Naval Vessel">Naval Vessel</option>
+                            <option value="LNG Carrier">LNG Carrier</option>
+                            <option value="LPG Carrier">LPG Carrier</option>
+                            <option value="Chemical Tanker">Chemical Tanker</option>
+                            <option value="Oil Tanker">Oil Tanker</option>
+                            <option value="RORO Vessel">RORO Vessel</option>
+                            <option value="Heavy Lift Vessel">Heavy Lift Vessel</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fromDate_${experienceCounter}">From Date <span class="required">*</span></label>
+                        <input type="date" id="fromDate_${experienceCounter}" name="fromDate_${experienceCounter}" onchange="calculateExperience(${experienceCounter})" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="toDate_${experienceCounter}">To Date <span class="required">*</span></label>
+                        <input type="date" id="toDate_${experienceCounter}" name="toDate_${experienceCounter}" onchange="calculateExperience(${experienceCounter})" required>
+                    </div>
+                </div>
+                <div class="form-row single">
+                    <div class="form-group">
+                        <label for="experienceDuration_${experienceCounter}">Experience Duration</label>
+                        <input type="text" id="experienceDuration_${experienceCounter}" name="experienceDuration_${experienceCounter}" readonly style="background-color: #f8f9fa; font-weight: bold; color: #2a5298;">
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(newEntry);
+            
+            // Add event listeners to new inputs
+            const newInputs = newEntry.querySelectorAll('input, select');
+            newInputs.forEach(element => {
+                element.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'scale(1.02)';
+                });
+                
+                element.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        // Function to remove experience entry
+        function removeExperienceEntry(button) {
+            button.parentElement.remove();
+            calculateTotalExperience();
+        }
+
+        // Add event listener for add experience button
+        document.getElementById('addExperienceBtn').addEventListener('click', addExperienceEntry);
+
+        document.getElementById('seafarerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = '#e74c3c';
+                } else {
+                    field.style.borderColor = '#e1e8f0';
+                }
+            });
+            
+            if (isValid) {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // In a real application, you would send the form data to your server here
+                console.log('Form submitted successfully');
+                
+                // Reset form after a delay
+                setTimeout(() => {
+                    this.reset();
+                    document.getElementById('successMessage').style.display = 'none';
+                    
+                    // Reset experience entries to just one
+                    const container = document.getElementById('experienceContainer');
+                    const entries = container.querySelectorAll('.experience-entry');
+                    for (let i = 1; i < entries.length; i++) {
+                        entries[i].remove();
+                    }
+                    experienceCounter = 1;
+                    
+                    // Clear calculated fields
+                    document.getElementById('experienceDuration_1').value = '';
+                    document.getElementById('totalCalculatedExperience').value = '';
+                }, 3000);
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
