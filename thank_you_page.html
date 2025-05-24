@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Submitted - Thank You</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 60px 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            font-size: 5em;
+            color: #28a745;
+            margin-bottom: 20px;
+            animation: checkmark 0.6s ease-in-out 0.2s both;
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0) rotate(-45deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            color: #2a5298;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .message {
+            color: #555;
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .next-steps {
+            background: linear-gradient(145deg, #f8fbff 0%, #e8f2ff 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .next-steps h3 {
+            color: #2a5298;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .next-steps ul {
+            text-align: left;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .next-steps li {
+            margin-bottom: 8px;
+        }
+
+        .contact-info {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 2px solid #e8f2ff;
+        }
+
+        .contact-info h4 {
+            color: #2a5298;
+            margin-bottom: 10px;
+        }
+
+        .contact-info p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .reference-number {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 40px 25px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .success-icon {
+                font-size: 4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✅</div>
+        
+        <h1>Application Submitted!</h1>
+        
+        <p class="message">
+            Thank you for submitting your seafarer application. We have successfully received your application and all supporting documents.
+        </p>
+
+        <div class="reference-number">
+            <strong>Reference ID:</strong> <span id="referenceId"></span>
+        </div>
+
+        <div class="next-steps">
+            <h3>What happens next?</h3>
+            <ul>
+                <li>📧 You will receive a confirmation email within 24 hours</li>
+                <li>📋 Our recruitment team will review your application and documents</li>
+                <li>📞 We will contact you within 3-5 business days if your profile matches our current openings</li>
+                <li>🎯 If selected, we will schedule an interview and discuss next steps</li>
+                <li>🚢 Successful candidates will be contacted for vessel placement</li>
+            </ul>
+        </div>
+
+        <div class="contact-info">
+            <h4>Need to contact us?</h4>
+            <p><strong>Email:</strong> recruitment@yourcompany.com</p>
+            <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+            <p><strong>Office Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM</p>
+        </div>
+
+        <p style="color: #888; font-size: 0.9em; margin: 20px 0;">
+            Please keep this reference number for your records. You can use it to track your application status.
+        </p>
+
+        <a href="seafarer-form.html" class="back-button">Submit Another Application</a>
+    </div>
+
+    <script>
+        // Generate a simple reference ID
+        function generateReferenceId() {
+            const timestamp = Date.now().toString().slice(-6);
+            const random = Math.random().toString(36).substring(2, 5).toUpperCase();
+            return `SF-${timestamp}-${random}`;
+        }
+
+        // Set the reference ID
+        document.getElementById('referenceId').textContent = generateReferenceId();
+
+        // Optional: Store in localStorage for future reference
+        const refId = document.getElementById('referenceId').textContent;
+        localStorage.setItem('lastApplicationRef', refId);
+    </script>
+</body>
+</html>
